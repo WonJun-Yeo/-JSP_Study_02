@@ -1,2 +1,2 @@
-# -JSP_Study_02
+# JSP_Study_02
 MVC2
