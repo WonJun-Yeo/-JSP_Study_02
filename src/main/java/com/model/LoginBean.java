@@ -1,6 +1,6 @@
 package com.model;
 
-public class LoginBean {			// ºñÁö´Ï½º ·ÎÁ÷À» Ã³¸®ÇÏ´Â DTO (°ªÀ» ¹Ş¾Æ¼­ Àü´ŞÇÏ´Â Àü´ŞÀÚ ¿ªÇÒ)
+public class LoginBean {			// ë¹„ì§€ë‹ˆìŠ¤ ë¡œì§ì„ ì²˜ë¦¬í•˜ëŠ” DTO (ê°’ì„ ë°›ì•„ì„œ ì „ë‹¬í•˜ëŠ” ì „ë‹¬ì ì—­í• )
 	private String id;
 	private String password;
 	

@@ -10,18 +10,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class myController extends HttpServlet {		// Controller ¼ÂÆÃ
+public class myController extends HttpServlet {		// Controller ì…‹íŒ…
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// Client¿¡¼­ Get ¹æ½ÄÀ¸·Î ¿äÃ»ÇÒ °æ¿ì Ã³¸®ÇÏ´Â ºí·°
+		// Clientì—ì„œ Get ë°©ì‹ìœ¼ë¡œ ìš”ì²­í•  ê²½ìš° ì²˜ë¦¬í•˜ëŠ” ë¸”ëŸ­
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Client¿¡¼­  Post ¹æ½ÄÀ¸·Î ¿äÃ»ÇÒ °æ¿ì Ã³¸®ÇÏ´Â ºí·°
+		// Clientì—ì„œ  Post ë°©ì‹ìœ¼ë¡œ ìš”ì²­í•  ê²½ìš° ì²˜ë¦¬í•˜ëŠ” ë¸”ëŸ­
 		
-		// clientÀÇ ºä ÆäÀÌÁö·Î Àü¼ÛÇÒ contentTypeÀ» Á¤ÀÇ 
+		// clientì˜ ë·° í˜ì´ì§€ë¡œ ì „ì†¡í•  contentTypeì„ ì •ì˜ 
 		response.setContentType("text.html; charset = utf-8");
 		
 		String id = request.getParameter("id");
@@ -33,7 +33,7 @@ public class myController extends HttpServlet {		// Controller ¼ÂÆÃ
 		
 		request.setAttribute("bean", bean);
 		
-		boolean status = bean.validate();		// password°¡ "admin"ÀÌ¸é true, ¾Æ´Ï¸é false
+		boolean status = bean.validate();		// passwordê°€ "admin"ì´ë©´ true, ì•„ë‹ˆë©´ false
 		
 		if (status) {
 			RequestDispatcher rd = request.getRequestDispatcher("mvc_success.jsp");

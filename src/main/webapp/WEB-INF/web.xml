@@ -1,81 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app>	<!-- web.xml은 톰캣 서비스가 시작될 때 각종 설정을 읽어서 톰캣에 적용. 톰캣 서비스를 재시작하여야 web.xml의 수정사항이 적용
-				주의! web.xml이 오타 및 에러 발생시 톰캣 작동 불가
-				web.xml을 설정하면 각각의 JSP 페이지에서 설정하지 않아도 됨 -->
-  <display-name>MVC_M2</display-name>
-  <welcome-file-list>	<!-- URL에 프로젝트명까지만 검색하면 해당 리스트에 있는 파일들을 순서대로 하나씩 출력(index.html 출력, index.html이 없으면 index.jsp 출력) -->
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>kbh.html</welcome-file>
-  </welcome-file-list>
-  <!-- web-app tag 내 모든 설정 -->
-  
-  <!-- OracleDB 접속 정보 -->
-  <context-param>
-  	<param-name>OracleDriver</param-name>	<!-- 대소문자 주의하여 작성! -->
-  	<param-value>oracle.jdbc.OracleDriver</param-value>	 <!-- 대소문자 주의하여 작성! -->
+<!--
+web.xml은 톰캣 서비스가 시작될 때 각종 설정을 읽어서 톰캣에 적용
+톰캣 서비스를 재시작하여야 web.xml의 수정사항이 적용 주의!
+web.xml이 오타 및 에러 발생시 톰캣 작동 불가
+web.xml을 설정하면 각각의 JSP 페이지에서 설정하지 않아도 됨 
+-->
+<web-app>
+	<display-name>MVC_M2</display-name>
+	<welcome-file-list>
+	<!--
+	URL에 프로젝트명까지만 검색하면 해당 리스트에 있는 파일들을 순서대로 하나씩 출력(index.html 출력
+	index.html이 없으면 index.jsp 출력)
+	-->
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>kbh.html</welcome-file>
+	</welcome-file-list>
+	<!-- web-app tag 내 모든 설정 -->
+
+	<!-- OracleDB 접속 정보 -->
+	<context-param>
+		<param-name>OracleDriver</param-name>				<!-- 대소문자 주의하여 작성! -->
+		<param-value>oracle.jdbc.OracleDriver</param-value>	 <!-- 대소문자 주의하여 작성! -->
+	</context-param>
+
+	<context-param>
+		<param-name>OracleURL</param-name>								<!-- param-name : 변수명 -->
+		<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>	<!-- param-value : 변수값 -->
+	</context-param>
+
+	<context-param>
+		<param-name>OracleId</param-name>
+		<param-value>hr2</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>OraclePwd</param-name>
+		<param-value>oracle</param-value>
+	</context-param>
+
+	<!-- session(세션) 유지기간 설정 (20분동안 세션 유지) -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+
+	<!-- 한글 깨짐 방지를 위한 설정 (인코딩 설정) -->
+	<filter>
+		<filter-name>SetCharEncoding</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharEncoding</filter-name>	<!-- 위의 filter 태그의 filter-name 태그의 이름값과 동일해야함 -->
+		<url-pattern>/*</url-pattern>	<!-- 이 프로젝트의 모든 페이지에 대해서 설정 -->
+	</filter-mapping>
+
+
+	<!-- 서블릿(Controller) 매핑 설정 서블릿(servlet) : *.java (확장자가 java) -> html로 출력 
+		(확장자가 java인 파일을 html로 출력하는 자바를 서블릿이라 함) -> 이전 개념 서블릿(servlet) = controller 
+		-> 현재 개념 (자바를 웹페이지로 출력할 수 있도록 하는 것) -->
+
+	<servlet>
+		<servlet-name>myController</servlet-name>
+		<servlet-class>com.controller.myController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>myController</servlet-name>
+		<url-pattern>/mvc_test/my.do</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- MVCBoard 글목록 보기 Controller 매핑 -->
+	<servlet>
+		<servlet-name>MVCBoardList</servlet-name>
+		<servlet-class>model2.mvcboard.ListController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MVCBoardList</servlet-name>
+		<url-pattern>/mvcboard/list.do</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- 페이징 처리를 위한 설정 (변수값 할당) 출력레코드 수 : 10개, 페이지수 : 5개 -->
+	<context-param>
+     <param-name>POSTS_PER_PAGE</param-name>
+     <param-value>10</param-value>
   </context-param>
   
-  <context-param>
-  	<param-name>OracleURL</param-name>	<!-- param-name : 변수명 -->
-  	<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>	<!-- param-value : 변수값 -->
-  </context-param>
-  
-  <context-param>
-  	<param-name>OracleId</param-name>
-  	<param-value>hr2</param-value>
-  </context-param>
-  
-  <context-param>
-  	<param-name>OraclePwd</param-name>
-  	<param-value>oracle</param-value>
-  </context-param>
-  
-  <!-- session(세션) 유지기간 설정 (20분동안 세션 유지)-->
-  <session-config>
-  	<session-timeout>20</session-timeout>
-  </session-config>
-  
-  <!-- 한글 깨짐 방지를 위한 설정 (인코딩 설정) -->
-  <filter>
-  	<filter-name>SetCharEncoding</filter-name>
-  	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-  		<init-param>
-  			<param-name>encoding</param-name>
-  			<param-value>utf-8</param-value>
-  		</init-param>
-  </filter>
-  <filter-mapping>
-  	<filter-name>SetCharEncoding</filter-name>	<!-- 위의 filter 태그의 filter-name 태그의 이름값과 동일해야함 -->
-  	<url-pattern>/*</url-pattern>	<!--  이 프로젝트의 모든 페이지에 대해서 설정 -->
-  </filter-mapping>
-  
-  <!-- 서블릿(Controller) 매핑 설정
- 	서블릿(servlet) : *.java (확장자가 java) -> html로 출력 (확장자가 java인 파일을 html로 출력하는 자바를 서블릿이라 함) -> 이전 개념
- 	서블릿(servlet) = controller -> 현재 개념 (자바를 웹페이지로 출력할 수 있도록 하는 것)
-  -->
-  
-  <!-- <servlet>
-  	<servlet-name>MVCBoardList</servlet-name>
-  	<servlet-class>model2.mvcboard.ListController</servlet-class>	요청을 받아 지정된 서블릿(controller)이 처리
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>MVCBoardList</servlet-name>
-  	<url-patterm>/MVC_M2/list.do</url-patterm>	요청
-  </servlet-mapping> -->
-  
-  <servlet>
-  	<servlet-name>myController</servlet-name>	<!-- servlet-mapping과 연결 -->
-  	<servlet-class>com.controller.myController</servlet-class>	<!-- com.controller : 패키지 / Mycontroller가 서블릿 -->
-  </servlet>
-  
-  <servlet-mapping>
-	 <servlet-name>myController</servlet-name>	<!-- 위의 servlet-name 태그의 이름값과 동일해야함 (연결) -->
-	 <url-pattern>/mvc_test/my.do</url-pattern>	<!-- 요청을 받으면 com.controller.Mycontroller 이름의 Controller에게 요청을 전달  -->
-  </servlet-mapping>
+	<context-param>
+		<param-name>PAGES_PER_BLOCK</param-name>
+		<param-value>5</param-value>
+	</context-param>
+
 </web-app>
+
