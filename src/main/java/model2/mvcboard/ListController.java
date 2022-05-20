@@ -32,14 +32,14 @@ public class ListController extends HttpServlet {
 			map.put("searchWord", searchWord);
 		}
 		
-		// 3. 게시믈 갯수 알아오기 ( DAO의 selectCount(map) )
-		
+		// 3. 게시믈 갯수 알아오기 ( DAO의 selectCount(map)메소드 )
+			// start, end page 계산하기 위해 필요함
 		int totalCount = dao.selectCount(map);
 		
 		// System.out.println("전제 레코드 수 : " + totalCount);
 		
-		// 페이징 처리 부분 start
-			// web.xml에서
+		/* 페이징 처리 부분 start */
+		// web.xml에 셋팅된 변수 불러오기
 		ServletContext application = getServletContext();
 		int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
 		int blockPage = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
@@ -47,26 +47,24 @@ public class ListController extends HttpServlet {
 			//System.out.println(pageSize);
 			//System.out.println(blockPage);
 		
-			// 현재 페이지 확인
+		// 현재 페이지 확인
 		int pageNum = 1;
 		String pageTemp = req.getParameter("pageNum");
 		if (pageTemp != null && !pageTemp.equals("")) {				// 값이 비어 있지 않을때 넘어온 변수를 정수로 변환하여 저장
 			pageNum = Integer.parseInt(pageTemp);
 		}
 		
-			// 목록에 출력할 게시물 범위 계산
+		// 목록에 출력할 게시물 범위 계산
 		int start = (pageNum - 1) * pageSize + 1;					// 첫 게시물 번호
 		int end = pageNum * pageSize;								// 마지막 게시물 번호
 		
-			// 뷰페이지에 값을 던져줌
+		// 뷰페이지에 값을 던져줌
 		map.put("start", start);
 		map.put("end", end);
+		/* 페이징 처리 부분 end */
 		
-		
-		
-		// 페이징 처리 부분 end
-			// 게시물 목록을 받아오시 (DAO 객체에 작업을 전달)
-			// boardLists는 DB의 레코드를 담은 dto 객체를 담고 있다.
+		// 게시물 목록을 받아오기 (DAO 객체에 작업을 전달)
+		// boardLists는 DB의 레코드를 담은 dto 객체를 담고 있다.
 		List<MVCBoardDTO> boardLists = dao.selectListPage(map);
 		dao.close();
 		

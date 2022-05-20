@@ -2,8 +2,14 @@
 
 Controller(서블릿) 매핑 설정
 	1. web.xml에서 설정
-	2. @ (어노테이션)을 이용한 설정
-	
+		- 중앙에서 client 요청에 대한 Controller를 쉽게 확인 할 수 있다.
+		
+		
+	2. @WebServlet("/mvcboard/view.do") (어노테이션)을 이용한 설정
+		- Controller 클래스위에 셋팅되므로 client 요청에 대한 Controller를 찾기 위해서 일일이 확인해봐야한다.
+		- 수정이나 없데이트가 거의 일어나지 않는 경우 적합
+		
+		
 첨부 파일이 있는 게시판 (MVC 모델2) : 중, 대규모 사이트 개발할 때
 	1. Database의 테이블 생성 (더미 데이터 입력)
 	2. DTO 객체 생성 : Application ==> DTO ==> DAO ==> DataBase

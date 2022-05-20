@@ -1,9 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
-
 import com.model.LoginBean;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -42,9 +40,5 @@ public class myController extends HttpServlet {		// Controller 셋팅
 			RequestDispatcher rd = request.getRequestDispatcher("mvc_error.jsp");
 			rd.forward(request, response);
 		}
-		
-		
-		
 	}
-
 }

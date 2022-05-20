@@ -1,6 +1,5 @@
--- Å×ÀÌºí »ı¼º
 create table mvcboard (
-    idx  number primary key,
+    idx number primary key,
     name varchar2(50) not null,
     title varchar2(200) not null,
     content varchar2(2000) not null,
@@ -10,30 +9,29 @@ create table mvcboard (
     downcount number(5) default 0 not null,
     pass varchar2(50) not null,
     visitcount number default 0 not null
-);
+    );
+    
+create sequence seq_mvcboard_num
+    increment by 1
+    start with 1
+    nocache;
+    
+-- ë”ë¯¸ ë°ì´í„° ì…ë ¥
+insert into mvcboard(idx, name, title, content, pass)
+    values(seq_mvcboard_num.nextval, 'ì„.D ìœ ì‹ ', 'ìë£Œì‹¤ ì œëª©1 ì…ë‹ˆë‹¤.', 'ë‚´ìš©1', 'a1234');
 
--- ½ÃÄö½º »ı¼º
-create sequence seq_board_num
-increment by 1
-start with 1
-nocache;
-
--- ´õ¹Ìµ¥ÀÌÅÍ ÀÔ·Â
-insert into mvcboard (idx, name, title, content, pass)
-values (seq_board_num.nextval, '±èÀ¯½Å', 'ÀÚ·á½Ç Á¦¸ñ1', '³»¿ë1', '1234');
-
-insert into mvcboard (idx, name, title, content, pass)
-values (seq_board_num.nextval, 'È«±æµ¿', 'ÀÚ·á½Ç Á¦¸ñ2', '³»¿ë2', '1234');
-
-insert into mvcboard (idx, name, title, content, pass)
-values (seq_board_num.nextval, 'Å·¼¼Á¾', 'ÀÚ·á½Ç Á¦¸ñ3', '³»¿ë3', '1234');
-
-insert into mvcboard (idx, name, title, content, pass)
-values (seq_board_num.nextval, '°«°ü¼ø', 'ÀÚ·á½Ç Á¦¸ñ4', '³»¿ë4', '1234');
-
-insert into mvcboard (idx, name, title, content, pass)
-values (seq_board_num.nextval, 'ÀÌ¼ø½Å', 'ÀÚ·á½Ç Á¦¸ñ5', '³»¿ë5', '1234');
-
+insert into mvcboard(idx, name, title, content, pass)
+    values(seq_mvcboard_num.nextval, 'ì„.D ìˆœì‹ ', 'ìë£Œì‹¤ ì œëª©2 ì…ë‹ˆë‹¤.', 'ë‚´ìš©2', 'b1234');
+    
+insert into mvcboard(idx, name, title, content, pass)
+    values(seq_mvcboard_num.nextval, 'ì„.D ê°ì°¬', 'ìë£Œì‹¤ ì œëª©3 ì…ë‹ˆë‹¤.', 'ë‚´ìš©3', 'c1234');
+    
+insert into mvcboard(idx, name, title, content, pass)
+    values(seq_mvcboard_num.nextval, 'ì„.D ì„ë‹¹', 'ìë£Œì‹¤ ì œëª©4 ì…ë‹ˆë‹¤.', 'ë‚´ìš©4', 'd1234');
+    
+insert into mvcboard(idx, name, title, content, pass)
+    values(seq_mvcboard_num.nextval, 'ì„.D ê¸¸ë™', 'ìë£Œì‹¤ ì œëª©5 ì…ë‹ˆë‹¤.', 'ë‚´ìš©5', 'e1234');
+    
 commit;
 
 select * from mvcboard;

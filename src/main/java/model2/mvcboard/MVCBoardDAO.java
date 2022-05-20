@@ -3,7 +3,6 @@ package model2.mvcboard;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-
 import common.DBConnPool;
 
 public class MVCBoardDAO extends DBConnPool {
@@ -38,23 +37,24 @@ public class MVCBoardDAO extends DBConnPool {
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map) {
 		List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
 		
-		String query = " "
-				+ "SELECT * FROM ("
-				+ "SELECT Tb.*, ROWNUM rNUM FROM ( "
-				+ "SELECT * FROM mvcboard";
-		
-		if (map.get("searchWord") != null) {				// 검색기능을 사용했다면
-			query += "WHERE" + map.get(" searchField")
-				+ " LIKE '%" + map.get("searchWord") + "%'";
-		}
-		
-		query += " ORDER BY "
-				+ " ) Tb "
-				+ ") "
-				+ " WHERE rNUM BETWEEN ? AND ?";
-		
-		
-		try {		// psmt 객체 생성 후 쿼리 실행
+		 String query = " "
+                 + "SELECT * FROM ( "
+                 + "    SELECT Tb.*, ROWNUM rNum FROM ( "
+                 + "        SELECT * FROM mvcboard ";
+
+	    if (map.get("searchWord") != null)
+	    {
+	        query += " WHERE " + map.get("searchField")
+	               + " LIKE '%" + map.get("searchWord") + "%' ";
+	    }
+	
+	    query += "        ORDER BY idx DESC "
+	           + "    ) Tb "
+	           + " ) "
+	           + " WHERE rNum BETWEEN ? AND ?";
+
+		// psmt 객체 생성 후 쿼리 실행
+		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, map.get("start").toString());
 			psmt.setString(2, map.get("end").toString());
