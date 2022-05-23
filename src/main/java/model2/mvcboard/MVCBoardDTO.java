@@ -1,37 +1,20 @@
 package model2.mvcboard;
 
 public class MVCBoardDTO {
-	// DB의 컬럼의 값을 저장하고 전송해주는 역할
-	private String idx;
-	private String name;
-	private String title;
-	private String content;
-	private java.sql.Date postdate;
-	private String ofile;
-	private String sfile;
-	private String pass;
-	private int downcount;
+	//DB의 컬럼의 값을 저장하고 전송해 주는 역활  
+	
+	private String idx; 
+	private String name; 
+	private String title; 
+	private String content; 
+	private java.sql.Date postdate; 
+	private String ofile; 
+	private String sfile; 
+	private int downcount; 
+	private String pass; 
 	private int visitcount;
 	
-	public int getDowncount() {
-		return downcount;
-	}
-	public void setDowncount(int downcount) {
-		this.downcount = downcount;
-	}
-	public int getVisitcount() {
-		return visitcount;
-	}
-	public void setVisitcount(int visitcount) {
-		this.visitcount = visitcount;
-	}
-	// getter, setter 생성
-	public String getPass() {
-		return pass;
-	}
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
+	// getter, setter  생성
 	public String getIdx() {
 		return idx;
 	}
@@ -74,4 +57,23 @@ public class MVCBoardDTO {
 	public void setSfile(String sfile) {
 		this.sfile = sfile;
 	}
+	public int getDowncount() {
+		return downcount;
+	}
+	public void setDowncount(int downcount) {
+		this.downcount = downcount;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public int getVisitcount() {
+		return visitcount;
+	}
+	public void setVisitcount(int visitcount) {
+		this.visitcount = visitcount;
+	} 
+
 }

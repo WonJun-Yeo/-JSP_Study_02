@@ -1,7 +1,9 @@
 package com.model;
 
-public class LoginBean {			// 비지니스 로직을 처리하는 DTO (값을 받아서 전달하는 전달자 역할)
-	private String id;
+
+public class LoginBean {   //비즈니스 로직을 처리하는 DTO (값을 받어서 전달하는 전달자 역활을 한다. 
+	
+	private String id ; 
 	private String password;
 	
 	public String getId() {
@@ -15,14 +17,13 @@ public class LoginBean {			// 비지니스 로직을 처리하는 DTO (값을 �
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	} 
 	
 	public boolean validate() {
-		if (password.equals("admin")) {
-			return true;
-		} else {
-			return false;
-		}
+		if (password.equals("admin"))
+			return true; 
+		else 
+			return false; 
 	}
-	
+
 }
