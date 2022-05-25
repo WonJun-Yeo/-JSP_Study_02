@@ -1,0 +1,8 @@
+Session 시간 설정 방법 2가지 (TomCat의 기본 세션 유지 시간은 20분이다.)
+	1. Web.xml
+		단위가 분(m)
+		모든 사용자에게 셋팅 (전역 셋팅)
+	
+	2. session.setMaxInactiveInterval(초);
+		단위가 초(s)
+		특정 사용자마다 셋팅

@@ -1,0 +1,8 @@
+1. 세션을 처리하는 테이블 생성
+	member 테이블 생성
+	더미 데이터 입력
+2. DTO 생성
+	membership.MemberDTO.java
+3. DAO 생성
+	membership.MemberDAO.java
+4. View 페이지 생성
