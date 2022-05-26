@@ -6,3 +6,36 @@
 3. DAO 생성
 	membership.MemberDAO.java
 4. View 페이지 생성
+
+
+===============================================
+JSP의 내장 객체 : import 없이 바로 사용할 수 있는 객체
+
+1. request
+2. response
+3. application
+4. session
+5. out
+6. exception
+7. cookie
+
+
+내장 객체 사용 범위
+1. page 영역
+	동일한 페이지 영역에서만 공유
+	즉, 페이지를 벗어나면 소멸됨
+
+2. request 영역
+	클라이언트의 요청에 의해서 호출된 페이지와 요청이 전달된 페이지(forward 페이지) 까지 공유
+	새로운 페이지를 호출 시(sendRedirect) 소멸됨 
+
+3. session 영역
+	클라이언트가 처음 접속한 후, 웹브라우저를 닫을 때 까지 공유
+	forward나 새로운 페이지로 이동(sendRedirect) 후에도 소멸되지 않는다.
+	session 유지 시간이 끝나거나, 웹브라우저를 닫으면 소멸
+	해당 세션 ID에서만 공유. 즉, 다른 사용자와는 공유되지 않는다.
+	세션 ID는 서버에 접속할 때, 랜덤으로 생성된다.
+	
+4. application 영역
+	웹어플리케이션이 종료될 때 까지 유지된다.
+	웹 서버 종료 시 소멸됨
